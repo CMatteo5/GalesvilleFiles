@@ -1,0 +1,25 @@
+{
+	"scriptID": 0,
+	"finalLine" : 0,
+	"lines": [
+		{
+			"direction":"neither",
+			"leftCharacterID": 0,
+			"rightCharacterID" : 0,
+			"displayLine": "This is the default script to end the scene"
+		}
+	],
+	"button1text": "",
+	"button2text": "",
+	"button3text": "",
+	"button4text": "",
+	"button1mode": 0,
+	"button2mode": 0,
+	"button3mode": 0,
+	"button4mode": 0,
+	"followUpScriptID1": 0,
+	"followUpScriptID2": 0,
+	"followUpScriptID3": 0,
+	"followUpScriptID4": 0
+	
+}

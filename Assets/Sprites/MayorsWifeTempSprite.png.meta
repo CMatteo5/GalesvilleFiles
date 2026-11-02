@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: e640e323324480e4983d621c888932ba
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5622317747317468696
+    second: MayorsWifeTempSprite_0
+  - first:
+      213: 8999772460843962522
+    second: MayorsWifeTempSprite_1
+  - first:
+      213: -2635627960510934032
+    second: MayorsWifeTempSprite_2
+  - first:
+      213: -5920410527159404816
+    second: MayorsWifeTempSprite_3
+  - first:
+      213: 1972569335377135622
+    second: MayorsWifeTempSprite_4
+  - first:
+      213: 1352798243709500785
+    second: MayorsWifeTempSprite_5
+  - first:
+      213: -8094425197229553085
+    second: MayorsWifeTempSprite_6
+  - first:
+      213: 5870171117011425034
+    second: MayorsWifeTempSprite_7
+  - first:
+      213: 4874424989838986345
+    second: MayorsWifeTempSprite_8
+  - first:
+      213: 3275923332679145874
+    second: MayorsWifeTempSprite_9
+  - first:
+      213: -3388212309969869221
+    second: MayorsWifeTempSprite_10
+  - first:
+      213: 3854106983787500702
+    second: MayorsWifeTempSprite_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 276
+        width: 51
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81e6b3fe33c760e40800000000000000
+      internalID: 5622317747317468696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 290
+        width: 41
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9092fbce5d95ec70800000000000000
+      internalID: 8999772460843962522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_2
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 316
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f398a5855e5c6bd0800000000000000
+      internalID: -2635627960510934032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_3
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 288
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f63e244ef976dda0800000000000000
+      internalID: -5920410527159404816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_4
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 274
+        width: 53
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6088bf10c59ff5b10800000000000000
+      internalID: 1972569335377135622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_5
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 278
+        width: 29
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17db311d5da16c210800000000000000
+      internalID: 1352798243709500785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_6
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 280
+        width: 33
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34a49225b23daaf80800000000000000
+      internalID: -8094425197229553085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_7
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 266
+        width: 27
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0759388789077150800000000000000
+      internalID: 5870171117011425034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_8
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 302
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96cc3a3d3bf65a340800000000000000
+      internalID: 4874424989838986345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 272
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29911cb1aea667d20800000000000000
+      internalID: 3275923332679145874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_10
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 284
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b56e3a80bd6aaf0d0800000000000000
+      internalID: -3388212309969869221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MayorsWifeTempSprite_11
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 0
+        width: 157
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e94910fb1e98c7530800000000000000
+      internalID: 3854106983787500702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      MayorsWifeTempSprite_0: 5622317747317468696
+      MayorsWifeTempSprite_1: 8999772460843962522
+      MayorsWifeTempSprite_10: -3388212309969869221
+      MayorsWifeTempSprite_11: 3854106983787500702
+      MayorsWifeTempSprite_2: -2635627960510934032
+      MayorsWifeTempSprite_3: -5920410527159404816
+      MayorsWifeTempSprite_4: 1972569335377135622
+      MayorsWifeTempSprite_5: 1352798243709500785
+      MayorsWifeTempSprite_6: -8094425197229553085
+      MayorsWifeTempSprite_7: 5870171117011425034
+      MayorsWifeTempSprite_8: 4874424989838986345
+      MayorsWifeTempSprite_9: 3275923332679145874
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
