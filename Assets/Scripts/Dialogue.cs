@@ -48,9 +48,7 @@ public class Dialogue : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Intentionally empty: GameManager is the only thing that starts dialogue
-        // (it calls StartDialogue() after it has loaded a script). Don't clear the text
-        // here, or it can wipe the first typed letter depending on Start() order.
+        //Leave Empty
     }
 
     // Update is called once per frame
@@ -77,7 +75,6 @@ public class Dialogue : MonoBehaviour
     {
         StopAllCoroutines();
         textComponent.text = string.Empty;
-
         int lastValidIndex = gameManagerRef.currentScript.lines.Count - 1;
         if (gameManagerRef.currentScript.finalLine > lastValidIndex)
         {

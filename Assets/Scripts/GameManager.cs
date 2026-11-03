@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -46,21 +47,97 @@ public class GameManager : MonoBehaviour
     public Button optionButton3;
     public Button optionButton4;
 
+    public GameObject player;
+    public GameObject startPoint;
+
+    //Movement + camera
+    public CameraFollow cameraFollow;   // the Main Camera (with CameraFollow on it)
+    public AreaBounds currentArea;      // the area the player is in right now
+    PlayerMovement playerMovement;
+    Camera mainCam;
+    bool finishedLastFrame;
+
+    public GameObject[] interactibles;
+    public bool mapVisible = false;
+    public float playerX;
+    public float playerY;
+
     // 1 = Wednesday, 2 = Thursday, 3 = Friday, 4 = Saturday, 5 = Sunday
     public int day;
-    // 1 = Dawn , 2 = Day, 3 = Dusk, 4 = Night
+    // 1 = Dawn, 2 = Day, 3 = Dusk, 4 = Night
     public int timeOfDay;
 
+    // 1 = Town Square, 2 = Main Street, 3 = Outskirts, 4 = Hotel
+    public int mainPOI;
+
+    // 1 = Streets (Applies for All), 2 = Hospital/General Store/Church respectively, 3 = Police Station/Butchery/Miller House, 4 = Mayoral Office/ Butchery / Backwood Still, 5 = Hotel Room
+    public int subPOI;
+
+
+    public bool foundBenny;
 
     void Start()
     {
+        mainCam = Camera.main;
+
+        playerMovement = player.GetComponent<PlayerMovement>();
+        if (playerMovement == null)
+        {
+            Debug.LogError("GameManager: the player object needs a PlayerMovement component.");
+        }
+
+        if (cameraFollow != null)
+        {
+            cameraFollow.target = player.transform;
+        }
+        else
+        {
+            Debug.LogError("GameManager: assign the Main Camera (with CameraFollow) to the Camera Follow slot.");
+        }
+
+        SetArea(currentArea);
         changeScript("ExampleScript");
     }
 
 
     void Update()
     {
+        playerX = player.transform.position.x;
+        playerY = player.transform.position.y;
+        if (dialogueHandler.scriptFinished)
+        {
+            if (finishedLastFrame && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                if (playerMovement != null)
+                {
+                    Vector3 worldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+                    playerMovement.MoveTo(worldPos.x);
+                }
+            }
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                showMap();
+            }
+        }
+
+        finishedLastFrame = dialogueHandler.scriptFinished;
+    }
+
+    public void SetArea(AreaBounds newArea)
+    {
+        currentArea = newArea;
+
+        if (playerMovement != null)
+        {
+            playerMovement.area = newArea;
+        }
+
+        if (cameraFollow != null)
+        {
+            cameraFollow.area = newArea;
+            cameraFollow.SnapToTarget();
+        }
     }
 
     void changeScript(string IDstring)
@@ -162,5 +239,17 @@ public class GameManager : MonoBehaviour
         optionButton2.gameObject.SetActive(false);
         optionButton3.gameObject.SetActive(false);
         optionButton4.gameObject.SetActive(false);
+    }
+
+    public void showMap()
+    {
+        if (!mapVisible)
+        {
+            mapVisible = true;
+        }
+        else
+        {
+            mapVisible = false;
+        }
     }
 }
