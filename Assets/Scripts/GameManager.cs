@@ -1,11 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    // The one GameManager that survived across scenes. Scene objects use this
+    // instead of an Inspector reference, because a scene's own copy of the
+    // GameManager gets destroyed as a duplicate when you arrive from elsewhere.
+    public static GameManager Instance { get; private set; }
+
     //Individual Line Data Class
     [System.Serializable]
     public class lineData
@@ -40,6 +46,8 @@ public class GameManager : MonoBehaviour
     public scriptData currentScript;
     TextAsset currentScriptFile;
 
+    // ---------- Persistent references (these objects travel with the GameManager) ----------
+    [Header("Persistent objects (GameUI, Player, Main Camera)")]
     public Dialogue dialogueHandler;
 
     public Button optionButton1;
@@ -48,16 +56,26 @@ public class GameManager : MonoBehaviour
     public Button optionButton4;
 
     public GameObject player;
-    public GameObject startPoint;
-
-    //Movement + camera
     public CameraFollow cameraFollow;   // the Main Camera (with CameraFollow on it)
+
+    public GameObject mapStuff;
+    public Image mapBackground;
+    public Button townsqaureButton;
+    public Button mainStreetButton;
+    public Button outskirtsButton;
+
+    // ---------- Found automatically in each scene ----------
+    [Header("Found automatically when a scene loads")]
     public AreaBounds currentArea;      // the area the player is in right now
+    public SpawnPoint currentSpawn;
+
     PlayerMovement playerMovement;
     Camera mainCam;
     bool finishedLastFrame;
+    bool sceneSetUp;
 
-    public GameObject[] interactibles;
+    // ---------- Game state (survives scene loads because GameManager does) ----------
+    [Header("Game state")]
     public bool mapVisible = false;
     public float playerX;
     public float playerY;
@@ -73,51 +91,174 @@ public class GameManager : MonoBehaviour
     // 1 = Streets (Applies for All), 2 = Hospital/General Store/Church respectively, 3 = Police Station/Butchery/Miller House, 4 = Mayoral Office/ Butchery / Backwood Still, 5 = Hotel Room
     public int subPOI;
 
-
     public bool foundBenny;
+
+    // One-time interactables that have already been used, so they stay used
+    // after you leave a scene and come back.
+    readonly HashSet<string> usedInteractables = new HashSet<string>();
+
+
+    void Awake()
+    {
+        // Backup guard in case KeepAcrossScenes is missing from this object.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Instance = null;
+        }
+    }
 
     void Start()
     {
-        mainCam = Camera.main;
+        EnsurePersistentRefs();
 
-        playerMovement = player.GetComponent<PlayerMovement>();
-        if (playerMovement == null)
-        {
-            Debug.LogError("GameManager: the player object needs a PlayerMovement component.");
-        }
-
-        if (cameraFollow != null)
+        if (cameraFollow != null && player != null)
         {
             cameraFollow.target = player.transform;
         }
-        else
+
+        // The first scene may already have been set up by OnSceneLoaded.
+        if (!sceneSetUp)
         {
-            Debug.LogError("GameManager: assign the Main Camera (with CameraFollow) to the Camera Follow slot.");
+            SetUpScene();
+        }
+        // No dialogue on load. Dialogue starts from Interactables
+        // (or call changeScript("ScriptName") wherever you want one to begin).
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SetUpScene();
+    }
+
+    // Runs every time a scene loads: hooks the persistent objects up to
+    // whatever AreaBounds and SpawnPoint the new scene contains.
+    void SetUpScene()
+    {
+        sceneSetUp = true;
+        EnsurePersistentRefs();
+
+        HideMap();
+
+        currentArea = FindFirstObjectByType<AreaBounds>();
+        if (currentArea == null)
+        {
+            Debug.LogError("GameManager: scene '" + SceneManager.GetActiveScene().name + "' has no AreaBounds.");
+        }
+
+        currentSpawn = FindFirstObjectByType<SpawnPoint>();
+
+        if (player != null)
+        {
+            if (playerMovement != null)
+            {
+                playerMovement.Stop();   // don't keep walking toward a spot from the last scene
+            }
+
+            Vector3 pos = player.transform.position;
+            if (currentSpawn != null)
+            {
+                pos.x = currentSpawn.transform.position.x;
+                pos.y = currentSpawn.transform.position.y;
+            }
+            else if (currentArea != null && currentArea.IsValid)
+            {
+                Debug.LogWarning("GameManager: no SpawnPoint in this scene, using the middle of the AreaBounds.");
+                pos.x = currentArea.CenterX;
+            }
+            player.transform.position = pos;
+        }
+
+        if (cameraFollow != null && player != null)
+        {
+            cameraFollow.target = player.transform;
         }
 
         SetArea(currentArea);
-        changeScript("ExampleScript");
+    }
+    void EnsurePersistentRefs()
+    {
+        if (player == null)
+        {
+            PlayerMovement found = FindFirstObjectByType<PlayerMovement>();
+            if (found != null)
+            {
+                player = found.gameObject;
+            }
+        }
+
+        if (player != null && playerMovement == null)
+        {
+            playerMovement = player.GetComponent<PlayerMovement>();
+            if (playerMovement == null)
+            {
+                Debug.LogError("GameManager: the player object needs a PlayerMovement component.");
+            }
+        }
+        else if (player == null)
+        {
+            Debug.LogError("GameManager: no Player found. Assign it in the Player slot.");
+        }
+
+        if (cameraFollow == null)
+        {
+            cameraFollow = FindFirstObjectByType<CameraFollow>();
+            if (cameraFollow == null)
+            {
+                Debug.LogError("GameManager: assign the Main Camera (with CameraFollow) to the Camera Follow slot.");
+            }
+        }
+
+        if (mainCam == null)
+        {
+            mainCam = cameraFollow != null ? cameraFollow.GetComponent<Camera>() : Camera.main;
+        }
+
+        if (dialogueHandler == null)
+        {
+            dialogueHandler = FindFirstObjectByType<Dialogue>(FindObjectsInactive.Include);
+        }
     }
 
 
     void Update()
     {
+        if (player == null || dialogueHandler == null)
+        {
+            return;
+        }
+
         playerX = player.transform.position.x;
         playerY = player.transform.position.y;
         if (dialogueHandler.scriptFinished)
         {
             if (finishedLastFrame && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                if (playerMovement != null)
+                if (playerMovement != null && mainCam != null)
                 {
                     Vector3 worldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                    playerMovement.MoveTo(worldPos.x);
+                    Collider2D hit = Physics2D.OverlapPoint(worldPos);
+                    if (hit == null || hit.GetComponent<Interactable>() == null)
+                    {
+                        playerMovement.MoveTo(worldPos.x);
+                    }
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                showMap();
+                toggleMap();
             }
         }
 
@@ -140,7 +281,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void changeScript(string IDstring)
+    public void changeScript(string IDstring)
     {
         hideButtons();
         currentScriptFile = Resources.Load<TextAsset>(IDstring);
@@ -241,15 +382,66 @@ public class GameManager : MonoBehaviour
         optionButton4.gameObject.SetActive(false);
     }
 
-    public void showMap()
+    // Called by a SubPOIButton: records the location, closes the map and loads its scene.
+    public void changeScene(int deltaMainPOI, int deltaSubPOI, string sceneName)
     {
-        if (!mapVisible)
+        if (string.IsNullOrEmpty(sceneName))
         {
-            mapVisible = true;
+            Debug.LogError("GameManager: this sub-POI button has no Scene Name set.");
+            return;
+        }
+
+        if (!Application.CanStreamedLevelBeLoaded(sceneName))
+        {
+            Debug.LogError("GameManager: scene '" + sceneName + "' isn't in the build's scene list. " +
+                "Add it under File > Build Profiles > Scene List.");
+            return;
+        }
+
+        mainPOI = deltaMainPOI;
+        subPOI = deltaSubPOI;
+        HideMap();
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void toggleMap()
+    {
+        if (mapVisible)
+        {
+            HideMap();
         }
         else
         {
-            mapVisible = false;
+            Debug.Log("Showing map");
+            mapVisible = true;
+            mapBackground.gameObject.SetActive(true);
+            mainStreetButton.gameObject.SetActive(true);
+            townsqaureButton.gameObject.SetActive(true);
+            outskirtsButton.gameObject.SetActive(true);
         }
+    }
+
+    public void HideMap()
+    {
+        mapVisible = false;
+        if (mapStuff == null)
+        {
+            return;
+        }
+        foreach (Transform child in mapStuff.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    // ---------- One-time interactable tracking ----------
+    public bool IsInteractableUsed(string id)
+    {
+        return usedInteractables.Contains(id);
+    }
+
+    public void MarkInteractableUsed(string id)
+    {
+        usedInteractables.Add(id);
     }
 }

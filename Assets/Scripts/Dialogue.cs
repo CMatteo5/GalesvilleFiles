@@ -21,7 +21,14 @@ public class Dialogue : MonoBehaviour
     public int rightID;
     public int leftID;
     public bool scriptFinished;
-    public GameManager gameManagerRef;
+
+
+    GameManager gameManagerRef { get { return GameManager.Instance; } }
+
+
+    public GameObject dialogueStuff;
+
+    int startFrame = -1;
 
 
 
@@ -45,18 +52,25 @@ public class Dialogue : MonoBehaviour
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        //Leave Empty
+        scriptFinished = true;
+        if (dialogueStuff != null)
+        {
+            dialogueStuff.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Dialogue: assign DialogueStuff to the Dialogue Stuff slot.");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.frameCount != startFrame)
         {
-            if (!scriptFinished)
+            if (!scriptFinished && gameManagerRef != null && gameManagerRef.currentScript != null)
             {
                 if (textComponent.text == gameManagerRef.currentScript.lines[index].displayLine)
                 {
@@ -73,6 +87,11 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue()
     {
+        if (dialogueStuff != null)
+        {
+            dialogueStuff.SetActive(true);
+        }
+        startFrame = Time.frameCount;
         StopAllCoroutines();
         textComponent.text = string.Empty;
         int lastValidIndex = gameManagerRef.currentScript.lines.Count - 1;
@@ -288,7 +307,12 @@ public class Dialogue : MonoBehaviour
     IEnumerator waitAndEnd()
     {
         yield return new WaitForSeconds(3f);
-        gameObject.SetActive(false);
+        scriptFinished = true;
+
+        if (dialogueStuff != null)
+        {
+            dialogueStuff.SetActive(false);
+        }
     }
 
     void NextLine()
@@ -307,7 +331,6 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            scriptFinished = true;
             gameManagerRef.showButtons();
             if (gameManagerRef.allButtonsInactive())
             {

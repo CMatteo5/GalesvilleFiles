@@ -66,10 +66,14 @@ MonoBehaviour:
   optionButton3: {fileID: 0}
   optionButton4: {fileID: 0}
   player: {fileID: 0}
-  startPoint: {fileID: 0}
   cameraFollow: {fileID: 0}
+  mapStuff: {fileID: 0}
+  mapBackground: {fileID: 0}
+  townsqaureButton: {fileID: 0}
+  mainStreetButton: {fileID: 0}
+  outskirtsButton: {fileID: 0}
   currentArea: {fileID: 0}
-  interactibles: []
+  currentSpawn: {fileID: 0}
   mapVisible: 0
   playerX: 0
   playerY: 0
