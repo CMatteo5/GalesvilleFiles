@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         public string direction;
         public int leftCharacterID;
         public int rightCharacterID;
+        public string sfx;
         public string displayLine;
     }
 

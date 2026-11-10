@@ -6,42 +6,49 @@
 			"direction":"neither",
 			"leftCharacterID": 0,
 			"rightCharacterID" : 0,
+			"sfx":"",
 			"displayLine": "The townspeople had so much to say about this house in particular. As you approach, perhaps you start to understand why."
 		},
 		{
 			"direction":"neither",
 			"leftCharacterID": 0,
 			"rightCharacterID" : 0,
+			"sfx":"",
 			"displayLine": "The house is large and old, with visible signs of repair and patches of paint that hardly match the ones next to them. The front of the house is adorned with many windows, but most of the curtains are drawn shut except one. Suddenly, a young boy pops his head barely over the windowsill. He makes eye contact with you, then scurries off closing the blinds behind him."
 		},
 		{
 			"direction":"neither",
 			"leftCharacterID": 0,
 			"rightCharacterID" : 0,
+			"sfx":"",
 			"displayLine": "In a remarkably fast amount of time, the residents of the house pour out in single file, each one retaining the eye contact the young boy broke to summon his family. He stands there with the rest of his dozen siblings, just one voice in their chorus."
 		},
 		{
 			"direction":"right",
 			"leftCharacterID": 1,
 			"rightCharacterID" : 3,
+			"sfx":"",
 			"displayLine": "Hello detective. We wondered when you would come to pay us a visit."
 		},
 		{
 			"direction":"neither",
 			"leftCharacterID": 1,
 			"rightCharacterID" : 3,
+			"sfx":"",
 			"displayLine": "The family said this in unison. Each member spoke with a similar monotone voice, save for the babies in the hands of some of the older Miller family members who watch on silently, eyes piercing into your own. Together, their voices compounded, projecting much more than they would have individually."
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 1,
 			"rightCharacterID" : 3,
+			"sfx":"",
 			"displayLine": "Ah... yes. I was hoping to speak to Henry and Nadine Miller individually. No need to trouble the children with this.. grizzly discussion."
 		},
 		{
 			"direction":"neither",
 			"leftCharacterID": 1,
 			"rightCharacterID" : 3,
+			"sfx":"",
 			"displayLine": "What would you like to do?"
 		}
 	],

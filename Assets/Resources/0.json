@@ -6,6 +6,7 @@
 			"direction":"neither",
 			"leftCharacterID": 0,
 			"rightCharacterID" : 0,
+			"sfx":"",
 			"displayLine": "This is the default script to end the scene"
 		}
 	],

@@ -6,12 +6,14 @@
 			"direction":"left",
 			"leftCharacterID": 6,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Anyways, Nurse O’Bannon, would you kindly tell us about the body we’ve all gathered here to see."
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 2,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Please follow me, while I inform you of my findings."
 		}
 			],

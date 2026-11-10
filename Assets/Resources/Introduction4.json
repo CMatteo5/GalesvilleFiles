@@ -6,60 +6,70 @@
 			"direction":"right",
 			"leftCharacterID": 2,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Good golly I’ve never seen anything like this in my life."
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 2,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "We have not either and believe us. The things that you see nowadays in this town are a little questionable. "
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 2,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "There is this mysterious substance all over him and it looks like it’s making him decompose faster than other corpses I’ve examined before. You can see the abnormal bite marks in his flesh, and his organs are completely visible. Lastly, his left arm and leg were amputated and were nowhere to be found at the scene of the crime."
 		},
 		{
 			"direction":"right",
 			"leftCharacterID": 2,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Ms. O’Bannon when did this occur exactly?"
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 2,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "I-"
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 8,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Well Miss detective, this occurred on Sunday, around the afternoon."
 		},
 		{
 			"direction":"right",
 			"leftCharacterID": 8,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Understood, would you happen to know the location the body was found?"
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 8,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "I actually took a picture of the scene, but the clutz that I am I left it at the Police Station. You’ll have to stop by if you want to take a look. That is, if you have the time. I’m sure you’ll be SO busy with getting to the bottom of this."
 		},
 		{
 			"direction":"right",
 			"leftCharacterID": 8,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Perhaps…"
 		},
 		{
 			"direction":"right",
 			"leftCharacterID": 0,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": " Do we have any sort of idea of motive? I know it's a little early to tell, but I need to start somewhere. I should ask if anyone's seen anything odd?"
 		}
 			],

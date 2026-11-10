@@ -171,10 +171,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Persistent
       objectReference: {fileID: 0}
-    - target: {fileID: 5204326148449680548, guid: bbd62bcc86c003b4395528d54283eaba, type: 3}
-      propertyPath: sceneName
-      value: Dialogue Test
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

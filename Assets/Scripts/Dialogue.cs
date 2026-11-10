@@ -9,6 +9,8 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public Image leftCharacter;
     public Image rightCharacter;
+    public SpriteRenderer rightSprite;
+    public SpriteRenderer leftSprite;
     //public string[] lines;
     public int[] focus;
     public int people;
@@ -45,15 +47,30 @@ public class Dialogue : MonoBehaviour
     public Sprite bootlegger;
     public Sprite mayorsWife;
     public Sprite monster;
+    public Sprite reverseDetective;
+    public Sprite reverseNurse;
+    public Sprite reverseBrood;
+    public Sprite reverseButcher;
+    public Sprite reverseReverend;
+    public Sprite reverseMayor;
+    public Sprite reverseEmployee;
+    public Sprite reverseSheriff;
+    public Sprite reverseDeacon;
+    public Sprite reverseBootlegger;
+    public Sprite reverseMayorsWife;
+    public Sprite reverseMonster;
 
 
     public int index;
     public int preIndex;
 
-
+    public AudioSource audioSoruce;
+    string soundPath;
 
     void Awake()
     {
+        rightSprite = rightCharacter.GetComponent<SpriteRenderer>();
+        leftSprite = leftCharacter.GetComponent<SpriteRenderer>();
         scriptFinished = true;
         if (dialogueStuff != null)
         {
@@ -107,6 +124,7 @@ public class Dialogue : MonoBehaviour
         rightID = gameManagerRef.currentScript.lines[index].rightCharacterID;
         leftID = gameManagerRef.currentScript.lines[index].leftCharacterID;
         StartCoroutine(TypeLine());
+        playLineSound();
         PeopleCheck();
         CheckCharacter();
     }
@@ -155,62 +173,62 @@ public class Dialogue : MonoBehaviour
         else if (rightID == 1)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = detective;
+            rightCharacter.sprite = reverseDetective;
         }
         else if (rightID == 2)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = nurse;
+            rightCharacter.sprite = reverseNurse;
         }
         else if (rightID == 3)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = brood;
+            rightCharacter.sprite = reverseBrood;
         }
         else if (rightID == 4)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = butcher;
+            rightCharacter.sprite = reverseButcher;
         }
         else if (rightID == 5)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = reverend;
+            rightCharacter.sprite = reverseReverend;
         }
         else if (rightID == 6)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = mayor;
+            rightCharacter.sprite = reverseReverend;
         }
         else if (rightID == 7)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = employee;
+            rightCharacter.sprite = reverseEmployee;
         }
         else if (rightID == 8)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = sheriff;
+            rightCharacter.sprite = reverseSheriff;
         }
         else if (rightID == 9)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = deacon;
+            rightCharacter.sprite = reverseDeacon;
         }
         else if (rightID == 10)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = bootlegger;
+            rightCharacter.sprite = reverseBootlegger;
         }
         else if (rightID == 11)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = mayorsWife;
+            rightCharacter.sprite = reverseMayorsWife;
         }
         else if (rightID == 12)
         {
             rightCharacter.gameObject.SetActive(true);
-            rightCharacter.sprite = monster;
+            rightCharacter.sprite = reverseMonster;
         }
 
         //Left Character Check
@@ -327,6 +345,7 @@ public class Dialogue : MonoBehaviour
             updatePeople();
             PeopleCheck();
             StartCoroutine(TypeLine());
+            playLineSound();
             Overlap();
         }
         else
@@ -337,5 +356,15 @@ public class Dialogue : MonoBehaviour
                 StartCoroutine(waitAndEnd());
             }
         }
+    }
+
+    void playLineSound()
+    {
+        if (gameManagerRef.currentScript.lines[index].sfx != "")
+        {
+            soundPath = gameManagerRef.currentScript.lines[index].sfx;
+            AudioClip temp = Resources.Load<AudioClip>(soundPath);
+            audioSoruce.PlayOneShot(temp);
+            }
     }
 }

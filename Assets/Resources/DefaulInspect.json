@@ -6,6 +6,7 @@
 			"direction":"neither",
 			"leftCharacterID": 0,
 			"rightCharacterID" : 0,
+			"sfx":"Sounds/SFX/testAudio",
 			"displayLine": "You clicked on something in the scene. I hope you liked it"
 		}
 	],

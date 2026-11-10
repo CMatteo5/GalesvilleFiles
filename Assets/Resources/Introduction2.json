@@ -6,24 +6,28 @@
 			"direction":"left",
 			"leftCharacterID": 8,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Well I’ll be damned. When they said Chicago was gonna send her finest, I didn’t expect them to send a her! Listen, lady, this isn’t some two timed co-ed city caper. Try not to stand in my way. If you’d like, maybe you can file the paperwork."
 		},
 		{
 			"direction":"right",
 			"leftCharacterID": 8,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "I.. uh… While I understand your hesitation towards my abilities, Sheriff. I assure you I’m perfectly capable of conducting a clean investigation."
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 6,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "Shooting a look at the sheriff  Hey, hey now, we’re all a big team stale chuckle. At the end of the day we all play for the same team … America."
 		},
 		{
 			"direction":"left",
 			"leftCharacterID": 6,
 			"rightCharacterID" : 1,
+			"sfx":"",
 			"displayLine": "One nation under God, right?"
 		}
 			],
