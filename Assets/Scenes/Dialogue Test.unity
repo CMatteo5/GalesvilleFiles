@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 2109108085}
     - target: {fileID: 5171250772802247901, guid: cb358c87e234770488a4af5c987c665c, type: 3}
       propertyPath: correspondingScriptFileName
-      value: ExampleScript
+      value: Introduction1
       objectReference: {fileID: 0}
     - target: {fileID: 7598964375564313771, guid: cb358c87e234770488a4af5c987c665c, type: 3}
       propertyPath: m_Sprite
