@@ -1,0 +1,31 @@
+{
+	"scriptID": 1,
+	"finalLine" : 1,
+	"lines": [
+		{
+			"direction":"left",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"displayLine": "Detective Müller! Galesville welcomes you with open arms! Sorry you have to see the town in this sorry state. I assure you this is an extremely atypical pickle we’ve found ourselves in here."
+		},
+		{
+			"direction":"right",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"displayLine": "Pleased to meet you, Mayor Rockwell. I’ve heard a lot about Galesville from my debrief with the captain earlier this week."
+		}
+			],
+	"button1text": "",
+	"button2text": "",
+	"button3text": "",
+	"button4text": "",
+	"button1mode": 0,
+	"button2mode": 0,
+	"button3mode": 0,
+	"button4mode": 0,
+	"followUpScriptID1": 0,
+	"followUpScriptID2": 0,
+	"followUpScriptID3": 0,
+	"followUpScriptID4": 0
+	
+}

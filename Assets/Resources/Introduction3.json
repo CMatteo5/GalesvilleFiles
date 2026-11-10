@@ -1,0 +1,31 @@
+{
+	"scriptID": 3,
+	"finalLine" : 1,
+	"lines": [
+		{
+			"direction":"left",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"displayLine": "Anyways, Nurse O’Bannon, would you kindly tell us about the body we’ve all gathered here to see."
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 2,
+			"rightCharacterID" : 1,
+			"displayLine": "Please follow me, while I inform you of my findings."
+		}
+			],
+	"button1text": "",
+	"button2text": "",
+	"button3text": "",
+	"button4text": "",
+	"button1mode": 0,
+	"button2mode": 0,
+	"button3mode": 0,
+	"button4mode": 0,
+	"followUpScriptID1": 0,
+	"followUpScriptID2": 0,
+	"followUpScriptID3": 0,
+	"followUpScriptID4": 0
+	
+}
