@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    public bool playerStartsLookingRight;
+    private void Start()
+    {
+        
+    }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

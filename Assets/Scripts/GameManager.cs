@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour
     // ---------- Persistent references (these objects travel with the GameManager) ----------
     [Header("Persistent objects (GameUI, Player, Main Camera)")]
     public Dialogue dialogueHandler;
+    public AudioSource music;
+    public AudioSource sfx;
 
     public Button optionButton1;
     public Button optionButton2;
@@ -64,6 +68,9 @@ public class GameManager : MonoBehaviour
     public Button townsqaureButton;
     public Button mainStreetButton;
     public Button outskirtsButton;
+    public Image introBackground;
+    public TextMeshProUGUI introText;
+    public TextMeshProUGUI introText2;
 
     // ---------- Found automatically in each scene ----------
     [Header("Found automatically when a scene loads")]
@@ -77,31 +84,40 @@ public class GameManager : MonoBehaviour
 
     // ---------- Game state (survives scene loads because GameManager does) ----------
     [Header("Game state")]
+    public bool foundBenny = false;
     public bool mapVisible = false;
     public float playerX;
     public float playerY;
+    public SpriteRenderer playerSprite;
+    public bool playerFacingRight;
+    public Texture2D fingerCursor;
+    public Texture2D glassCursor;
+    public Vector2 hotSpot = Vector2.zero;
+    public CursorMode cursorMode = CursorMode.Auto;
+
+    // ---------- Music ----------
+    [Header("Music")]
+    public AudioClip morgueSong;
 
     // 1 = Wednesday, 2 = Thursday, 3 = Friday, 4 = Saturday, 5 = Sunday
-    public int day;
+    public int day = 1;
     // 1 = Dawn, 2 = Day, 3 = Dusk, 4 = Night
-    public int timeOfDay;
+    public int timeOfDay = 1;
 
     // 1 = Town Square, 2 = Main Street, 3 = Outskirts, 4 = Hotel
     public int mainPOI;
 
-    // 1 = Streets (Applies for All), 2 = Hospital/General Store/Church respectively, 3 = Police Station/Butchery/Miller House, 4 = Mayoral Office/ Butchery / Backwood Still, 5 = Hotel Room
+    // 1 = Streets (Applies for All), 2 = Hospital/General Store/Church respectively, 3 = Police Station/Butchery/Miller House, 4 = Mayoral Office/ Ice Cream Parlor / Backwood Still, 5 = Morgue/ NA / NA / Hotel Room
     public int subPOI;
 
-    public bool foundBenny;
 
-    // One-time interactables that have already been used, so they stay used
-    // after you leave a scene and come back.
     readonly HashSet<string> usedInteractables = new HashSet<string>();
 
 
     void Awake()
     {
-        // Backup guard in case KeepAcrossScenes is missing from this object.
+        timeOfDay = 1;
+        day = 1;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -122,29 +138,36 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        EnsurePersistentRefs();
 
+        EnsurePersistentRefs();
         if (cameraFollow != null && player != null)
         {
             cameraFollow.target = player.transform;
         }
-
-        // The first scene may already have been set up by OnSceneLoaded.
         if (!sceneSetUp)
         {
             SetUpScene();
         }
-        // No dialogue on load. Dialogue starts from Interactables
-        // (or call changeScript("ScriptName") wherever you want one to begin).
+
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SetUpScene();
+        handleIntroText();
+        if (currentSpawn.playerStartsLookingRight)
+        {
+            playerFacingRight = true;
+            playerSprite.flipX = false;
+        }
+        else
+        {
+            playerFacingRight = false;
+            playerSprite.flipX = true;
+        }
     }
 
-    // Runs every time a scene loads: hooks the persistent objects up to
-    // whatever AreaBounds and SpawnPoint the new scene contains.
+
     void SetUpScene()
     {
         sceneSetUp = true;
@@ -185,7 +208,8 @@ public class GameManager : MonoBehaviour
         {
             cameraFollow.target = player.transform;
         }
-
+        mainPOI = currentArea.areaID;
+        subPOI = currentArea.areaSubID;
         SetArea(currentArea);
     }
     void EnsurePersistentRefs()
@@ -244,13 +268,58 @@ public class GameManager : MonoBehaviour
         playerY = player.transform.position.y;
         if (dialogueHandler.scriptFinished)
         {
-            if (finishedLastFrame && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            bool overUI = EventSystem.current.IsPointerOverGameObject();
+            Interactable hoveredInteractable = null;
+            Vector3 worldPos = Vector3.zero;
+
+            if (!overUI && mainCam != null)
+            {
+                worldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+
+                // OverlapPointAll so the player's own collider can't hide an interactable behind them
+                Collider2D[] hits = Physics2D.OverlapPointAll(worldPos);
+                foreach (Collider2D hit in hits)
+                {
+                    Interactable found = hit.GetComponent<Interactable>();
+                    if (found != null && IsInteractableAvailable(found))
+                    {
+                        hoveredInteractable = found;
+                        break;
+                    }
+                }
+            }
+
+            if (hoveredInteractable != null)
+            {
+                Cursor.SetCursor(glassCursor, hotSpot, cursorMode);
+            }
+            else
+            {
+                Cursor.SetCursor(fingerCursor, hotSpot, cursorMode);
+            }
+
+            if (finishedLastFrame && Input.GetMouseButtonDown(0) && !overUI)
             {
                 if (playerMovement != null && mainCam != null)
                 {
-                    Vector3 worldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                    Collider2D hit = Physics2D.OverlapPoint(worldPos);
-                    if (hit == null || hit.GetComponent<Interactable>() == null)
+                    if (worldPos.x > playerX)
+                    {
+                        if (!playerFacingRight)
+                        {
+                            playerFacingRight = true;
+                            playerSprite.flipX = false;
+                        }
+                    }
+                    else
+                    {
+                        if (playerFacingRight)
+                        {
+                            playerFacingRight = false;
+                            playerSprite.flipX = true;
+                        }
+                    }
+
+                    if (hoveredInteractable == null)
                     {
                         playerMovement.MoveTo(worldPos.x);
                     }
@@ -264,6 +333,13 @@ public class GameManager : MonoBehaviour
         }
 
         finishedLastFrame = dialogueHandler.scriptFinished;
+    }
+
+    // Mirrors Interactable.OnMouseDown: reclickable ones are always available,
+    // one-time ones are available until they've been used.
+    bool IsInteractableAvailable(Interactable interactable)
+    {
+        return interactable.reclickable || !IsInteractableUsed(interactable.interactableID);
     }
 
     public void SetArea(AreaBounds newArea)
@@ -435,7 +511,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ---------- One-time interactable tracking ----------
     public bool IsInteractableUsed(string id)
     {
         return usedInteractables.Contains(id);
@@ -445,4 +520,207 @@ public class GameManager : MonoBehaviour
     {
         usedInteractables.Add(id);
     }
+
+    public void handleIntroText()
+    {
+        string introText1String = "";
+        string introText2String = "";
+
+        //Time of Day
+        if (timeOfDay == 1)
+        {
+            introText1String += "Dawn";
+        }
+        else if (timeOfDay == 2)
+        {
+            introText1String += "Day";
+        }
+        else if (timeOfDay == 3)
+        {
+            introText1String += "Dusk";
+        }
+        else if (timeOfDay == 4)
+        {
+            introText1String += "Night";
+        }
+
+        //Day of the Week
+        if (day == 1)
+        {
+            introText1String += ", Wednesday October 12th, 1927";
+        }
+        else if (day == 2)
+        {
+            introText1String += ", Thursday October 13th, 1927";
+        }
+        else if (day == 3)
+        {
+            introText1String += ", Friday October 14th, 1927";
+        }
+        else if (day == 4)
+        {
+            introText1String += ", Saturday October 15th, 1927";
+        }
+        else if (day == 5)
+        {
+            introText1String += ", Sunday October 16th, 1927";
+        }
+
+        //Sub POI
+        if (subPOI == 1)
+        {
+            if (mainPOI == 1)
+                introText2String += "Town Square Streets, Galesville, Illinois";
+            if (mainPOI == 2)
+                introText2String += "Main Street Streets, Galesville, Illinois";
+            if (mainPOI == 3)
+                introText2String += "Outskirts Streets, Galesville, Illinois";
+        }
+        if (subPOI == 2)
+        {
+            if (mainPOI == 1)
+                introText2String += "Rockwell Hospital, Galesville, Illinois";
+            if (mainPOI == 2)
+                introText2String += "Galesville Feed and Supply, Galesville, Illinois";
+            if (mainPOI == 3)
+                introText2String += "Saint Matthew's Lutheran Church, Galesville, Illinois";
+        }
+        if (subPOI == 3)
+        {
+            if (mainPOI == 1)
+                introText2String += "Galesville Police Station, Galesville, Illinois";
+            if (mainPOI == 2)
+                introText2String += "Anderson Butchery, Galesville, Illinois";
+            if (mainPOI == 3)
+                introText2String += "Miller Homestead, Unincorporated Galesville, Illinois";
+        }
+        if (subPOI == 4)
+        {
+            if (mainPOI == 1)
+                introText2String += "Galesville Mayoral Office, Galesville, Illinois";
+            if (mainPOI == 2)
+                introText2String += "Betty's Ice Cream and Soda Fountain, Galesville, Illinois";
+            if (mainPOI == 3)
+                introText2String += "Miller Woods, Unincorporated Galesville, Illinois";
+        }
+        if (subPOI == 5)
+        {
+            if (mainPOI == 4)
+                introText2String += "Galesville Hostel Room 3, Galesville, Illinois";
+            if (mainPOI == 1)
+            {
+                introText2String += "Rockwell Hospital - Morgue, Galesville, Illinois";
+                music.PlayOneShot(morgueSong);
+            }
+        }
+
+        introText.text = introText1String;
+        introText2.text = introText2String;
+        StartCoroutine(fadeOut(introBackground.gameObject, 2f, 5f));
+        StartCoroutine(FadeInThenOut(introText.gameObject, introText2.gameObject, 2f, 2f));
+
+    }
+    IEnumerator FadeInThenOut(GameObject target1, GameObject target2, float duration, float waitTime)
+    {
+        CanvasGroup canvasGroup = target1.GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup2 = target2.GetComponent<CanvasGroup>();
+        canvasGroup2.alpha = 0f;
+        if (canvasGroup == null)
+        {
+            yield return null;
+        }
+
+        float halfDuration = duration / 2f;
+        float elapsedTime = 0f;
+
+        // Fade in
+        while (elapsedTime < halfDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsedTime / halfDuration);
+            yield return null;
+        }
+
+        // Ensure fully visible
+        canvasGroup.alpha = 1f;
+
+        // Wait for a moment before fading out
+        yield return new WaitForSeconds(waitTime);
+
+        elapsedTime = 0f;
+
+        // Fade out
+        while (elapsedTime < halfDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(1f - (elapsedTime / halfDuration));
+            yield return null;
+        }
+
+        // Ensure fully invisible
+        canvasGroup.alpha = 0f;
+
+        canvasGroup = target2.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            yield return null;
+        }
+
+         halfDuration = duration / 2f;
+         elapsedTime = 0f;
+
+        // Fade in
+        while (elapsedTime < halfDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsedTime / halfDuration);
+            yield return null;
+        }
+
+        // Ensure fully visible
+        canvasGroup.alpha = 1f;
+
+        // Wait for a moment before fading out
+        yield return new WaitForSeconds(waitTime);
+
+        elapsedTime = 0f;
+
+        // Fade out
+        while (elapsedTime < halfDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(1f - (elapsedTime / halfDuration));
+            yield return null;
+        }
+
+        // Ensure fully invisible
+        canvasGroup.alpha = 0f;
+
+
+    }
+
+    IEnumerator fadeOut(GameObject target, float duration, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        CanvasGroup canvasGroup = target.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            yield return null;
+        }
+
+        float elapsedTime = 0f;
+
+        // Fade out
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(1f - (elapsedTime / duration));
+            yield return null;
+        }
+
+        // Ensure fully invisible
+        canvasGroup.alpha = 0f;
+    }
+
+
 }

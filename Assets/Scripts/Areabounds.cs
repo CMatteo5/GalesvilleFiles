@@ -23,4 +23,7 @@ public class AreaBounds : MonoBehaviour
     {
         get { return (LeftX + RightX) * 0.5f; }
     }
+
+    public int areaID;
+    public int areaSubID;
 }

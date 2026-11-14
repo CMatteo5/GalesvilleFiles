@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9488b589d95e17543bc2d98098563cff
+guid: 45eeabf0885623645a64ef91ba2e8aa7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -882486688380967842
-    second: Nurse_Rough_Portrait_0
+      213: 9188960735148279959
+    second: Detective_Hero_Rough_Portrait 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Nurse_Rough_Portrait_0
+      name: Detective_Hero_Rough_Portrait 1_0
       rect:
         serializedVersion: 2
-        x: 137
+        x: 74
         y: 0
-        width: 591
-        height: 774
+        width: 706
+        height: 756
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e54aa045807c0c3f0800000000000000
-      internalID: -882486688380967842
+      spriteID: 79886897a1fb58f70800000000000000
+      internalID: 9188960735148279959
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Nurse_Rough_Portrait_0: -882486688380967842
+      Detective_Hero_Rough_Portrait 1_0: 9188960735148279959
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 083d6e4e696c05346a094ee52502c052
+guid: c7e68449c57ad3b4da987ce101656ad8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -684948840267269780
-    second: Reverse_Nurse_Rough_Portrait_0
+      213: -5807792986446770443
+    second: Sheriff_Rough_Portrait_V2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Reverse_Nurse_Rough_Portrait_0
+      name: Sheriff_Rough_Portrait_V2_0
       rect:
         serializedVersion: 2
-        x: 139
+        x: 0
         y: 0
-        width: 591
-        height: 774
+        width: 854
+        height: 788
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c69bd86a8a29e76f0800000000000000
-      internalID: -684948840267269780
+      spriteID: 5fec5d1cc03966fa0800000000000000
+      internalID: -5807792986446770443
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Reverse_Nurse_Rough_Portrait_0: -684948840267269780
+      Sheriff_Rough_Portrait_V2_0: -5807792986446770443
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

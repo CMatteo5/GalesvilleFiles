@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/WMorningMorgue.unity
+    guid: 8473b783bf39b994290e17c83a9e8efb
   - enabled: 1
     path: Assets/Scenes/SceneTemplate.unity
     guid: df21c0026eef6cd439ede532870a1c82
