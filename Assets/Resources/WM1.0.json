@@ -1,7 +1,70 @@
 {
-	"scriptID": 4,
-	"finalLine" : 9,
+	"scriptID": 1,
+	"finalLine" : 18,
 	"lines": [
+		{
+			"direction":"left",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "Detective Müller! Galesville welcomes you with open arms! Sorry you have to see the town in this sorry state. I assure you this is an extremely atypical pickle we’ve found ourselves in here."
+		},
+		{
+			"direction":"right",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "Pleased to meet you, Mayor Rockwell. I’ve heard a lot about Galesville from my debrief with the captain earlier this week."
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 8,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "Well I’ll be damned. When they said Chicago was gonna send her finest, I didn’t expect them to send a her! Listen, lady, this isn’t some two timed co-ed city caper. Try not to stand in my way. If you’d like, maybe you can file the paperwork."
+		},
+		{
+			"direction":"right",
+			"leftCharacterID": 8,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "I.. uh… While I understand your hesitation towards my abilities, Sheriff. I assure you I’m perfectly capable of conducting a clean investigation."
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "Hey, hey now, we’re all on the same side. At the end of the day we all play for the same team … America."
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "One nation under God, right?"
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 0,
+			"rightCharacterID" : 0,
+			"sfx":"",
+			"displayLine": "..."
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 6,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "Anyways, Nurse O’Bannon, would you kindly tell us about the body we’ve all gathered here to see."
+		},
+		{
+			"direction":"left",
+			"leftCharacterID": 2,
+			"rightCharacterID" : 1,
+			"sfx":"",
+			"displayLine": "Please follow me, while I inform you of my findings."
+		},
 		{
 			"direction":"right",
 			"leftCharacterID": 2,
